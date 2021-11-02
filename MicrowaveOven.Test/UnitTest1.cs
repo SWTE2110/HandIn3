@@ -7,6 +7,7 @@ namespace MicrowaveOven.Test
         [SetUp]
         public void Setup()
         {
+            Assert.Pass();
         }
 
         [Test]
@@ -15,6 +16,7 @@ namespace MicrowaveOven.Test
             Assert.Pass();
         }
 
+        [Test]
         public void Jenkins_Test()
         {
             Assert.Pass();
