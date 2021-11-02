@@ -13,13 +13,13 @@ namespace MicrowaveOven.Test
         [Test]
         public void Test1()
         {
-            Assert.Pass();
+            Assert.That(1, Is.EqualTo(1));
         }
 
         [Test]
         public void Jenkins_Test()
         {
-            Assert.Pass();
+            Assert.That(1, Is.EqualTo(1));
         }
     }
 }
