@@ -7,7 +7,7 @@ namespace MicrowaveOven.Test
         [SetUp]
         public void Setup()
         {
-            Assert.Pass();
+            
         }
 
         [Test]
