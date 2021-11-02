@@ -14,5 +14,10 @@ namespace MicrowaveOven.Test
         {
             Assert.Pass();
         }
+
+        public void Jenkins_Test()
+        {
+            Assert.Pass();
+        }
     }
 }
