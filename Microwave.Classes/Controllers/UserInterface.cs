@@ -75,9 +75,8 @@ namespace Microwave.Classes.Controllers
                 case States.SETTIME:
                     time += 1;
                     myDisplay.ShowTime(time, 0);
-                    myState = States.EXTENDTIME;
                     break;
-                case States.EXTENDTIME:
+                default:
                     myCooker.OnExtendTime();
                     time += 1;
                     myDisplay.ShowTime(time, 0);
@@ -94,7 +93,7 @@ namespace Microwave.Classes.Controllers
                     myDisplay.Clear();
                     myState = States.READY;
                     break;
-                case States.EXTENDTIME:
+                case States.SETTIME:
                     myLight.TurnOn();
                     myCooker.StartCooking(powerLevel, time*60);
                     myState = States.COOKING;

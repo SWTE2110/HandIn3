@@ -45,36 +45,25 @@ namespace Microwave.App
             powerButton.Press();
 
             timeButton.Press();
-            timeButton.Press();
-            timeButton.Press();
-            timeButton.Press();
-            //string n = "1";
-            //while (n != "0")
-            //{
-            //    switch (State)
-            //    {
-            //        case timeState.TimerOn:
-            //            timeButton.Press();
-            //            State = timeState.SetTime;
-            //            break;
-            //        case timeState.SetTime:
-            //            timeButton.Press();
-            //            State = timeState.ExtendTime;
-            //            break;
-            //        case timeState.ExtendTime:
-            //            Console.WriteLine("Press 1 to add a minut");
-            //            n = Console.ReadLine();
-            //            timeButton.Press();
-            //            break;
-            //    }
-            //}
 
             startCancelButton.Press();
 
+            string n = "1";
+            Console.WriteLine("Press 1 to add time | Press 0 to stop");
+            while (n != "0")
+            {
+                n = Console.ReadLine();
+                if (n != "0")
+                {
+                    timeButton.Press();
+                    
+                }
+            }
             // The simple sequence should now run
 
             System.Console.WriteLine("When you press enter, the program will stop");
             // Wait for input
+
 
             System.Console.ReadLine();
         }

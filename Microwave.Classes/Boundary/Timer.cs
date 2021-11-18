@@ -42,8 +42,7 @@ namespace Microwave.Classes.Boundary
 
         public void ExtendTimerEvent(object sender, EventArgs e)
         {
-            TimeRemaining += 1000;
-            
+            TimeRemaining += 60;
         }
 
         private void OnTimerEvent(object sender, System.Timers.ElapsedEventArgs args)

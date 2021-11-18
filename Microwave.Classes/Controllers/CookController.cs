@@ -56,7 +56,7 @@ namespace Microwave.Classes.Controllers
         public void OnExtendTime()
         {
             ExtendTime?.Invoke(this, EventArgs.Empty);
-
+            isCooking = true;
         }
 
         public void OnTimerExpired(object sender, EventArgs e)
