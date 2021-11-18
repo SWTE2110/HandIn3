@@ -8,7 +8,7 @@ namespace Microwave.Classes.Controllers
     {
         private enum States
         {
-            READY, SETPOWER, SETTIME, COOKING, DOOROPEN
+            READY, SETPOWER, SETTIME, EXTENDTIME, COOKING, DOOROPEN
         }
 
         private States myState = States.READY;
@@ -27,7 +27,8 @@ namespace Microwave.Classes.Controllers
             IDoor door,
             IDisplay display,
             ILight light,
-            ICookController cooker)
+            ICookController cooker,
+            ITimer timer)
         {
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);
@@ -39,6 +40,7 @@ namespace Microwave.Classes.Controllers
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
+            myCooker.ExtendTime += timer.ExtendTimerEvent;
         }
 
         private void ResetValues()
@@ -73,10 +75,16 @@ namespace Microwave.Classes.Controllers
                 case States.SETTIME:
                     time += 1;
                     myDisplay.ShowTime(time, 0);
+                    myState = States.EXTENDTIME;
+                    break;
+                case States.EXTENDTIME:
+                    myCooker.OnExtendTime();
+                    time += 1;
+                    myDisplay.ShowTime(time, 0);
                     break;
             }
         }
-
+        
         public void OnStartCancelPressed(object sender, EventArgs e)
         {
             switch (myState)
@@ -86,7 +94,7 @@ namespace Microwave.Classes.Controllers
                     myDisplay.Clear();
                     myState = States.READY;
                     break;
-                case States.SETTIME:
+                case States.EXTENDTIME:
                     myLight.TurnOn();
                     myCooker.StartCooking(powerLevel, time*60);
                     myState = States.COOKING;

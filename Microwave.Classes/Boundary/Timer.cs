@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 
 namespace Microwave.Classes.Boundary
@@ -19,8 +20,8 @@ namespace Microwave.Classes.Boundary
             timer.Elapsed += OnTimerEvent;
             timer.Interval = 1000; // 1 second intervals
             timer.AutoReset = true;  // Repeatable timer
-        }
 
+        }
 
         public void Start(int time)
         {
@@ -37,6 +38,12 @@ namespace Microwave.Classes.Boundary
         {
             timer.Enabled = false;
             Expired?.Invoke(this, System.EventArgs.Empty);
+        }
+
+        public void ExtendTimerEvent(object sender, EventArgs e)
+        {
+            TimeRemaining += 1000;
+            
         }
 
         private void OnTimerEvent(object sender, System.Timers.ElapsedEventArgs args)

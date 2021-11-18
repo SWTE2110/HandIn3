@@ -8,6 +8,8 @@ namespace Microwave.Classes.Interfaces
 {
     public interface ICookController
     {
+        public event EventHandler ExtendTime;
+        public void OnExtendTime();
         void StartCooking(int power, int time);
         void Stop();
     }
