@@ -16,7 +16,7 @@ namespace Microwave.Classes.Boundary
 
         public void BuzzThreeTimes()
         {
-            myOutput.OutputLine("bzz bzz bzz");
+            myOutput.OutputLine("buzz buzz buzz");
         }
     }
 }
