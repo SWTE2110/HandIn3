@@ -40,9 +40,14 @@ namespace Microwave.Classes.Boundary
             Expired?.Invoke(this, System.EventArgs.Empty);
         }
 
-        public void ExtendTimerEvent(object sender, EventArgs e)
+        public void ExtendTimerMinEvent(object sender, EventArgs e)
         {
             TimeRemaining += 60;
+        }
+
+        public void ExtendTimerSecEvent(object sender, EventArgs e)
+        {
+            TimeRemaining += 5;
         }
 
         private void OnTimerEvent(object sender, System.Timers.ElapsedEventArgs args)

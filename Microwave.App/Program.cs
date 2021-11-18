@@ -49,9 +49,11 @@ namespace Microwave.App
             startCancelButton.Press();
 
             string n = "1";
-            Console.WriteLine("Press 1 to add time | Press 0 to stop");
             while (n != "0")
             {
+
+                Console.WriteLine("Press 1 to add time | Press 0 to stop");
+
                 n = Console.ReadLine();
                 if (n != "0")
                 {
