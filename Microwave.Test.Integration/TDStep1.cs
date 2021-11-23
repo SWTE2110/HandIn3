@@ -33,6 +33,8 @@ namespace Microwave.Test.Integration
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
 
+            cooker.GetMaxPower().Returns(700);
+
             ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
         }
 

@@ -39,6 +39,7 @@ namespace Microwave.Test.Unit
                 display,
                 light,
                 cooker);
+            cooker.GetMaxPower().Returns(700);
         }
 
         [Test]

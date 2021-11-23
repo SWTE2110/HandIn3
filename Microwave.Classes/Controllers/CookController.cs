@@ -51,6 +51,11 @@ namespace Microwave.Classes.Controllers
             myTimer.Stop();
         }
 
+        public int GetMaxPower()
+        {
+            return myPowerTube.MaxPower;
+        }
+
         public void OnTimerExpired(object sender, EventArgs e)
         {
             if (isCooking)

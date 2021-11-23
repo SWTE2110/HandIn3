@@ -35,6 +35,7 @@ namespace Microwave.Test.Integration
             startCancelButton = new Button();
 
             powerTube = Substitute.For<IPowerTube>();
+            powerTube.MaxPower.Returns(700);
             timer = Substitute.For<ITimer>();
             output = Substitute.For<IOutput>();
 

@@ -23,6 +23,7 @@ namespace Microwave.Test.Unit
             timer = Substitute.For<ITimer>();
             display = Substitute.For<IDisplay>();
             powerTube = Substitute.For<IPowerTube>();
+            powerTube.MaxPower.Returns(700);
 
             uut = new CookController(timer, display, powerTube, ui);
         }
