@@ -92,8 +92,6 @@ namespace Microwave.Classes.Controllers
                     if (n == "2")
                         myCooker.OnExtendTime(false);
 
-                    time += 1;
-                    myDisplay.ShowTime(time, 0);
                     break;
             }
         }
