@@ -22,6 +22,7 @@ namespace Microwave.Test.Unit
 
         private ICookController cooker;
 
+
         private IBuzzer buzzer;
 
         [SetUp]
@@ -34,6 +35,7 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
+
             buzzer = Substitute.For<IBuzzer>();
             
 
@@ -44,6 +46,7 @@ namespace Microwave.Test.Unit
                 light,
                 cooker,
                 buzzer);
+
         }
 
         [Test]
