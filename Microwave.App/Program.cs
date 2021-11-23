@@ -9,7 +9,6 @@ namespace Microwave.App
 
         static void Main(string[] args)
         {
-
             Button startCancelButton = new Button();
             Button powerButton = new Button();
             Button timeButton = new Button();
@@ -25,13 +24,15 @@ namespace Microwave.App
             Light light = new Light(output);
 
             Timer timer = new Timer();
+          
+            Buzzer buzzer = new Buzzer(output);
 
             CookController cooker = new CookController(timer, display, powerTube);
 
             cooker.ExtendTimeMin += timer.ExtendTimerMinEvent;
             cooker.ExtendTimeSec += timer.ExtendTimerSecEvent;
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
 
             // Finish the double association
             cooker.UI = ui;
@@ -43,6 +44,7 @@ namespace Microwave.App
             timeButton.Press();
 
             startCancelButton.Press();
+
 
             string n = "1";
 
@@ -65,7 +67,6 @@ namespace Microwave.App
 
             System.Console.WriteLine("When you press enter, the program will stop");
             // Wait for input
-
 
             System.Console.ReadLine();
         }

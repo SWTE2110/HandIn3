@@ -1,7 +1,8 @@
-﻿using System;
+using System;
 using System.Threading;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
+
 using NUnit.Framework;
 using Timer = Microwave.Classes.Boundary.Timer;
 
@@ -13,11 +14,13 @@ namespace Microwave.Test.Unit
         private Timer uut;
         private ICookController cooker;
 
+
         [SetUp]
         public void Setup()
         {
             uut = new Timer();
             cooker = Substitute.For<ICookController>();
+
         }
 
         [Test]
@@ -179,6 +182,5 @@ namespace Microwave.Test.Unit
             Assert.That(EventSecIsCalled == true);
 
         }
-
     }
 }
