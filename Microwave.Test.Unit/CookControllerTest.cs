@@ -84,5 +84,19 @@ namespace Microwave.Test.Unit
             powerTube.Received().TurnOff();
         }
 
+        [TestCase(5)]
+        [TestCase(100)]
+        [TestCase(0)]
+
+        public void GetPowerTest(int power)
+        {
+            var res=0;
+            powerTube.MaxPower.Returns(power);
+
+            res = uut.GetMaxPower();
+
+            Assert.That(res,Is.EqualTo(power));
+     }
+
     }
 }
