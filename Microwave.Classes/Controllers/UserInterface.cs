@@ -40,8 +40,6 @@ namespace Microwave.Classes.Controllers
             myCooker = cooker;
             myLight = light;
             myDisplay = display;
-            myCooker.ExtendTimeMin += timer.ExtendTimerMinEvent;
-            myCooker.ExtendTimeSec += timer.ExtendTimerSecEvent;
 
         }
 

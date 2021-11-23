@@ -35,6 +35,9 @@ namespace Microwave.App
 
             CookController cooker = new CookController(timer, display, powerTube);
 
+            cooker.ExtendTimeMin += timer.ExtendTimerMinEvent;
+            cooker.ExtendTimeSec += timer.ExtendTimerSecEvent;
+
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, timer);
 
             // Finish the double association
