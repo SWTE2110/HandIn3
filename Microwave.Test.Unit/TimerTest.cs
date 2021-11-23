@@ -88,7 +88,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Stop_NotStarted_NoThrow()
         {
-            Assert.That( () => uut.Stop(), Throws.Nothing);
+            Assert.That(() => uut.Stop(), Throws.Nothing);
         }
 
         [Test]
@@ -121,7 +121,6 @@ namespace Microwave.Test.Unit
         public void Stop_StartedOneTick_NoExpiredTriggered()
         {
             ManualResetEvent pause = new ManualResetEvent(false);
-            int notifications = 0;
 
             uut.Expired += (sender, args) => pause.Set();
             uut.TimerTick += (sender, args) => uut.Stop();
@@ -150,25 +149,36 @@ namespace Microwave.Test.Unit
             // wait for ticks, only a little longer
             pause.WaitOne(ticks * 1000 + 100);
 
-            Assert.That(uut.TimeRemaining, Is.EqualTo(5-ticks*1));
+            Assert.That(uut.TimeRemaining, Is.EqualTo(5 - ticks * 1));
         }
 
         [Test]
-        public void Test_A_Extend_Time_Event_Minuts_Seconds()
+        public void Test_A_Extend_Time_Event_Minuts()
         {
 
             bool EventMinIsCalled = false;
-            bool EventSecIsCalled = false;
 
             cooker.ExtendTimeMin += (sender, args) => EventMinIsCalled = true;
-            cooker.ExtendTimeSec += (sender, args) => EventSecIsCalled = true;
 
             cooker.ExtendTimeMin += Raise.Event();
-            cooker.ExtendTimeSec += Raise.Event();
 
-            Assert.That(EventMinIsCalled == true && EventSecIsCalled == true);
+            Assert.That(EventMinIsCalled == true);
 
         }
-        
+
+        [Test]
+        public void Test_A_Extend_Time_Event_Seconds()
+        {
+
+            bool EventSecIsCalled = false;
+
+            cooker.ExtendTimeSec += (sender, args) => EventSecIsCalled = true;
+
+            cooker.ExtendTimeSec += Raise.Event();
+
+            Assert.That(EventSecIsCalled == true);
+
+        }
+
     }
 }

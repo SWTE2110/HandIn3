@@ -7,15 +7,8 @@ namespace Microwave.App
     class Program
     {
 
-        enum timeState
-        {
-            TimerOn, SetTime, ExtendTime
-        }
-
         static void Main(string[] args)
         {
-
-            timeState State = timeState.TimerOn; ;
 
             Button startCancelButton = new Button();
             Button powerButton = new Button();
@@ -38,7 +31,7 @@ namespace Microwave.App
             cooker.ExtendTimeMin += timer.ExtendTimerMinEvent;
             cooker.ExtendTimeSec += timer.ExtendTimerSecEvent;
 
-            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, timer);
+            UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
 
             // Finish the double association
             cooker.UI = ui;
@@ -52,29 +45,21 @@ namespace Microwave.App
             startCancelButton.Press();
 
             string n = "1";
-            string i = "1";
 
-            while (n != "0")
+            while (n != "3")
             {
-
-                Console.WriteLine("Press 1 to add time | Press 0 to stop");
+                Console.WriteLine("Press 1 to add 1 minut | Press 2 to add 5 seconds | Press 3 to set  permanent Time");
 
                 n = Console.ReadLine();
-                if (i != "0")
-                {
-                    Console.WriteLine("Add 1 minut press 1 | Add 5 seconds press 2");
 
-                    i = Console.ReadLine();
+                // Minuts:
+                if (n == "1")
+                    cooker.OnExtendTime(true);
 
-                    // Minuts:
-                    if (i == "1")
-                        cooker.OnExtendTime(true);
+                // Seconds
+                if (n == "2")
+                    cooker.OnExtendTime(false);
 
-                    // Seconds
-                    if (i == "2")
-                        cooker.OnExtendTime(false);
-
-                }
             }
             // The simple sequence should now run
 

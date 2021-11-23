@@ -8,7 +8,7 @@ namespace Microwave.Classes.Controllers
     {
         private enum States
         {
-            READY, SETPOWER, SETTIME, EXTENDTIME, COOKING, DOOROPEN
+            READY, SETPOWER, SETTIME, COOKING, DOOROPEN
         }
 
         private States myState = States.READY;
@@ -27,8 +27,7 @@ namespace Microwave.Classes.Controllers
             IDoor door,
             IDisplay display,
             ILight light,
-            ICookController cooker,
-            ITimer timer)
+            ICookController cooker)
         {
             powerButton.Pressed += new EventHandler(OnPowerPressed);
             timeButton.Pressed += new EventHandler(OnTimePressed);

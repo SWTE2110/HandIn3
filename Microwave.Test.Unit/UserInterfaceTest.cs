@@ -40,8 +40,7 @@ namespace Microwave.Test.Unit
                 door,
                 display,
                 light,
-                cooker,
-                timer);
+                cooker);
         }
 
         [Test]
