@@ -15,6 +15,11 @@ namespace Microwave.Classes.Controllers
         private IPowerTube myPowerTube;
         private ITimer myTimer;
 
+
+        public event EventHandler ExtendTimeMin;
+        public event EventHandler ExtendTimeSec;
+
+
         public CookController(
             ITimer timer,
             IDisplay display,
@@ -51,6 +56,22 @@ namespace Microwave.Classes.Controllers
             myTimer.Stop();
         }
 
+        public void OnExtendTime(bool state)
+        {
+            switch (state)
+            {
+                case true:
+                    ExtendTimeMin?.Invoke(this, EventArgs.Empty);
+                    break;
+                case false:
+                    ExtendTimeSec?.Invoke(this, EventArgs.Empty);
+                    break;
+            }
+                
+            isCooking = true;
+        }
+
+
         public void OnTimerExpired(object sender, EventArgs e)
         {
             if (isCooking)
@@ -69,5 +90,6 @@ namespace Microwave.Classes.Controllers
                 myDisplay.ShowTime(remaining / 60, remaining % 60);
             }
         }
+
     }
 }

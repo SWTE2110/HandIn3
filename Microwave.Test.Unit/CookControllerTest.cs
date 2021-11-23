@@ -83,5 +83,23 @@ namespace Microwave.Test.Unit
             powerTube.Received().TurnOff();
         }
 
+        [Test]
+        public void Test_ExtendTime_Eventhandler_Minuts_And_Seconds()
+        {
+
+            int x = 0;
+
+            // Test af event der addere 1 minut
+            uut.ExtendTimeMin += (sender, args) => x++;
+            uut.OnExtendTime(true);
+            Assert.AreEqual(x, 1);
+
+            // Test af event der addere 5 sekunder
+            uut.ExtendTimeSec += (sender, args) => x++;
+            uut.OnExtendTime(false);
+            Assert.AreEqual(x, 2);
+
+        }
+
     }
 }

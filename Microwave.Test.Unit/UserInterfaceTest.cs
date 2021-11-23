@@ -21,9 +21,9 @@ namespace Microwave.Test.Unit
         private ILight light;
 
         private ICookController cooker;
-
-
+        private ITimer timer;
         private IBuzzer buzzer;
+
 
         [SetUp]
         public void Setup()
@@ -35,9 +35,9 @@ namespace Microwave.Test.Unit
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
-
+            timer = Substitute.For<ITimer>();
             buzzer = Substitute.For<IBuzzer>();
-            
+
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
@@ -357,7 +357,6 @@ namespace Microwave.Test.Unit
 
             light.Received(1).TurnOff();
         }
-
 
     }
 
