@@ -1,4 +1,7 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using Microwave.Classes.Interfaces;
+using NSubstitute;
 using NUnit.Framework;
 using Timer = Microwave.Classes.Boundary.Timer;
 
@@ -8,11 +11,13 @@ namespace Microwave.Test.Unit
     public class TimerTest
     {
         private Timer uut;
+        private ICookController cooker;
 
         [SetUp]
         public void Setup()
         {
             uut = new Timer();
+            cooker = Substitute.For<ICookController>();
         }
 
         [Test]
@@ -148,6 +153,22 @@ namespace Microwave.Test.Unit
             Assert.That(uut.TimeRemaining, Is.EqualTo(5-ticks*1));
         }
 
+        [Test]
+        public void Test_A_Extend_Time_Event_Minuts_Seconds()
+        {
+
+            bool EventMinIsCalled = false;
+            bool EventSecIsCalled = false;
+
+            cooker.ExtendTimeMin += (sender, args) => EventMinIsCalled = true;
+            cooker.ExtendTimeSec += (sender, args) => EventSecIsCalled = true;
+
+            cooker.ExtendTimeMin += Raise.Event();
+            cooker.ExtendTimeSec += Raise.Event();
+
+            Assert.That(EventMinIsCalled == true && EventSecIsCalled == true);
+
+        }
         
     }
 }

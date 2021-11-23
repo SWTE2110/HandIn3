@@ -84,7 +84,7 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Test_ExtendTime_Event_Minuts()
+        public void Test_ExtendTime_Eventhandler_Minuts_And_Seconds()
         {
 
             int x = 0;
