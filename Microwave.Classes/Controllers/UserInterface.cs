@@ -78,21 +78,6 @@ namespace Microwave.Classes.Controllers
                     time += 1;
                     myDisplay.ShowTime(time, 0);
                     break;
-                default:
-                    string n = "0";
-                    Console.WriteLine("Add 1 minut press 1 | Add 5 seconds press 2");
-
-                    n = Console.ReadLine();
-
-                    // Minuts:
-                    if (n == "1")
-                        myCooker.OnExtendTime(true);
-
-                    // Seconds
-                    if (n == "2")
-                        myCooker.OnExtendTime(false);
-
-                    break;
             }
         }
         
