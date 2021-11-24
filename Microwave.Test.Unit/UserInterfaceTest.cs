@@ -214,7 +214,8 @@ namespace Microwave.Test.Unit
         [Test]
         public void Ready_FullPower_CookerIsCalledCorrectly()
         {
-            for (int i = 50; i <= 700; i += 50)
+            var pow = cooker.GetMaxPower();
+            for (int i = 50; i <= pow; i += 50)
             {
                 powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
             }
@@ -225,7 +226,7 @@ namespace Microwave.Test.Unit
             // Should call with correct values
             startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
 
-            cooker.Received(1).StartCooking(700, 60);
+            cooker.Received(1).StartCooking(pow, 60);
 
         }
 

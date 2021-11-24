@@ -45,7 +45,10 @@ namespace Microwave.Test.Integration
 
             light.Received(1).TurnOn();
         }
-        public void Door_UI_DoorClose()
+
+        [Test]
+
+    public void Door_UI_DoorClose()
         {
             door.Open();
             door.Close();
