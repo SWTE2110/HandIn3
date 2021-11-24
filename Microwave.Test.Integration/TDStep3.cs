@@ -23,6 +23,7 @@ namespace Microwave.Test.Integration
         private Light light;
         private Display display;
         private CookController cooker;
+        private Buzzer buzzer;
 
         private PowerTube powerTube;
         private Timer timer;
@@ -46,8 +47,9 @@ namespace Microwave.Test.Integration
 
 
             cooker = new CookController(timer, display, powerTube);
+            buzzer = new Buzzer(output);
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
             cooker.UI = ui;
         }
 
@@ -166,7 +168,7 @@ namespace Microwave.Test.Integration
             // Then we must make a new UI
             ui = new UserInterface(
                 powerButton, timeButton, startCancelButton,
-                door, display, light, cooker);
+                door, display, light, cooker, buzzer);
             // And make the association
             cooker.UI = ui;
 
@@ -250,6 +252,7 @@ namespace Microwave.Test.Integration
 
             // End of cooking is indicated by ligth being turned off
             output.Received(1).OutputLine(Arg.Is<string>(str => str.Contains("Light is turned off")));
+            output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("buzz")));
 
         }
 

@@ -93,10 +93,26 @@ namespace Microwave.Test.Unit
             var res=0;
             powerTube.MaxPower.Returns(power);
 
-            res = uut.GetMaxPower();
 
             Assert.That(res,Is.EqualTo(power));
-     }
+        }
+        [Test]
+        public void Test_ExtendTime_Eventhandler_Minuts_And_Seconds()
+        {
+
+            int x = 0;
+
+            // Test af event der addere 1 minut
+            uut.ExtendTimeMin += (sender, args) => x++;
+            uut.OnExtendTime(true);
+            Assert.AreEqual(x, 1);
+
+            // Test af event der addere 5 sekunder
+            uut.ExtendTimeSec += (sender, args) => x++;
+            uut.OnExtendTime(false);
+            Assert.AreEqual(x, 2);
+
+        }
 
     }
 }

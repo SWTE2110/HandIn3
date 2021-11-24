@@ -20,6 +20,9 @@ namespace Microwave.Test.Integration
         private ILight light;
         private IDisplay display;
         private ICookController cooker;
+        private ITimer timer;
+        private IBuzzer buzzer;
+
 
         [SetUp]
         public void Setup()
@@ -28,14 +31,17 @@ namespace Microwave.Test.Integration
             powerButton = new Button();
             timeButton = new Button();
             startCancelButton = new Button();
+            timer = new Timer();
+
 
             light = Substitute.For<ILight>();
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
+            timer = Substitute.For<ITimer>();
 
             cooker.GetMaxPower().Returns(700);
 
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
         }
 
         [Test]
@@ -48,7 +54,7 @@ namespace Microwave.Test.Integration
 
         [Test]
 
-    public void Door_UI_DoorClose()
+        public void Door_UI_DoorClose()
         {
             door.Open();
             door.Close();

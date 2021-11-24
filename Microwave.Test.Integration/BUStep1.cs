@@ -45,7 +45,7 @@ namespace Microwave.Test.Integration
             Assert.That(cooker.GetMaxPower(),Is.EqualTo(power));
         }
 
-    [Test]
+        [Test]
         public void CookController_PowerTube_TurnOn_50W()
         {
             cooker.StartCooking(50, 60);

@@ -18,6 +18,7 @@ namespace Microwave.Test.Integration
         private Display display;
         private PowerTube powerTube;
         private CookController cooker;
+        private Buzzer buzzer;
 
         private UserInterface ui;
         private Light light;
@@ -46,12 +47,13 @@ namespace Microwave.Test.Integration
             light = new Light(output);
 
             cooker = new CookController(timer, display, powerTube);
+            buzzer = new Buzzer(output);
 
 
             ui = new UserInterface(
                 powerButton, timeButton, startCancelButton,
                 door, 
-                display, light, cooker);
+                display, light, cooker, buzzer);
 
             cooker.UI = ui;
 
@@ -198,6 +200,7 @@ namespace Microwave.Test.Integration
 
             // Now should have turned off light
             output.Received(1).OutputLine(Arg.Is<string>(str => str.Contains("Light is turned off")));
+            output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("buzz")));
 
         }
 

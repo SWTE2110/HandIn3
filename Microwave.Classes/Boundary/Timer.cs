@@ -1,4 +1,5 @@
 ﻿using System;
+using Microwave.Classes.Controllers;
 using Microwave.Classes.Interfaces;
 
 namespace Microwave.Classes.Boundary
@@ -39,6 +40,16 @@ namespace Microwave.Classes.Boundary
             Expired?.Invoke(this, System.EventArgs.Empty);
         }
 
+        public void ExtendTimerMinEvent(object sender, EventArgs e)
+        {
+            TimeRemaining += 60;
+        }
+
+        public void ExtendTimerSecEvent(object sender, EventArgs e)
+        {
+            TimeRemaining += 5;
+        }
+
         private void OnTimerEvent(object sender, System.Timers.ElapsedEventArgs args)
         {
             // One tick has passed
@@ -51,6 +62,5 @@ namespace Microwave.Classes.Boundary
                 Expire();
             }
         }
-
     }
 }

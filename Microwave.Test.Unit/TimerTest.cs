@@ -1,4 +1,8 @@
-﻿using System.Threading;
+﻿using System;
+using System.Threading;
+using Microwave.Classes.Interfaces;
+using NSubstitute;
+
 using NUnit.Framework;
 using Timer = Microwave.Classes.Boundary.Timer;
 
@@ -8,11 +12,15 @@ namespace Microwave.Test.Unit
     public class TimerTest
     {
         private Timer uut;
+        private ICookController cooker;
+
 
         [SetUp]
         public void Setup()
         {
             uut = new Timer();
+            cooker = Substitute.For<ICookController>();
+
         }
 
         [Test]
@@ -83,7 +91,7 @@ namespace Microwave.Test.Unit
         [Test]
         public void Stop_NotStarted_NoThrow()
         {
-            Assert.That( () => uut.Stop(), Throws.Nothing);
+            Assert.That(() => uut.Stop(), Throws.Nothing);
         }
 
         [Test]
@@ -145,7 +153,31 @@ namespace Microwave.Test.Unit
             // wait for ticks, only a little longer
             pause.WaitOne(ticks * 1000 + 100);
 
-            Assert.That(uut.TimeRemaining, Is.EqualTo(5-ticks*1));
+            Assert.That(uut.TimeRemaining, Is.EqualTo(5 - ticks * 1));
+        }
+
+        [Test]
+        public void Test_A_Extend_Time_Event_Minuts()
+        {
+
+            cooker.ExtendTimeMin += uut.ExtendTimerMinEvent;
+
+            cooker.ExtendTimeMin += Raise.Event();
+
+            cooker.Received(1).ExtendTimeMin += uut.ExtendTimerMinEvent;
+
+        }
+
+        [Test]
+        public void Test_A_Extend_Time_Event_Seconds()
+        {
+
+            cooker.ExtendTimeSec += uut.ExtendTimerMinEvent;
+
+            cooker.ExtendTimeSec += Raise.Event();
+
+            cooker.Received(1).ExtendTimeSec += uut.ExtendTimerMinEvent;
+
         }
     }
 }
