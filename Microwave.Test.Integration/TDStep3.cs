@@ -244,6 +244,7 @@ namespace Microwave.Test.Integration
 
             // End of cooking is indicated by ligth being turned off
             output.Received(1).OutputLine(Arg.Is<string>(str => str.Contains("Light is turned off")));
+            output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("buzz")));
 
         }
 
