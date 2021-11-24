@@ -86,7 +86,7 @@ namespace Microwave.Test.Integration
         {
             powerTube = new PowerTube(output, pow);
             cooker = new CookController(timer, display, powerTube);
-            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker,buzzer);
             cooker.UI = ui;
 
             for (int p = 50; p <= cooker.GetMaxPower(); p += 50)

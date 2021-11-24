@@ -93,6 +93,7 @@ namespace Microwave.Test.Unit
             var res=0;
             powerTube.MaxPower.Returns(power);
 
+            res = uut.GetMaxPower();
 
             Assert.That(res,Is.EqualTo(power));
         }
