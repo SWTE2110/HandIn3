@@ -45,6 +45,7 @@ namespace Microwave.Test.Integration
             powerTube = new PowerTube(output);
             timer = new Timer();
 
+
             cooker = new CookController(timer, display, powerTube);
             buzzer = new Buzzer(output);
 
@@ -78,18 +79,25 @@ namespace Microwave.Test.Integration
             output.Received().OutputLine(Arg.Is<string>(str => str.Contains("150") && str.Contains("PowerTube works")));
         }
 
-        [Test]
-        public void CookController_PowerTube_TurnOn_700W()
+        [TestCase(100)]
+        [TestCase(700)]
+        [TestCase(1500)]
+        public void CookController_PowerTube_TurnOn_MaxPower(int pow)
         {
-            for (int p = 50; p <= 700; p += 50)
+            powerTube = new PowerTube(output, pow);
+            cooker = new CookController(timer, display, powerTube);
+            ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker,buzzer);
+            cooker.UI = ui;
+
+            for (int p = 50; p <= cooker.GetMaxPower(); p += 50)
             {
                 powerButton.Press();
             }
             timeButton.Press();
             startCancelButton.Press();
 
-            // Should now be started with 700W
-            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("700") && str.Contains("PowerTube works")));
+            // Should now be started with max power
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains($"{cooker.GetMaxPower()}") && str.Contains("PowerTube works")));
         }
 
         [Test]

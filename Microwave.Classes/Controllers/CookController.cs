@@ -59,8 +59,13 @@ namespace Microwave.Classes.Controllers
             myTimer.Stop();
         }
 
+        public int GetMaxPower()
+        {
+            return myPowerTube.MaxPower;
+        }
         public void OnExtendTime(bool state)
         {
+            
             switch (state)
             {
                 case true:

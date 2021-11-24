@@ -49,6 +49,7 @@ namespace Microwave.Test.Integration
             cooker = new CookController(timer, display, powerTube);
             buzzer = new Buzzer(output);
 
+
             ui = new UserInterface(
                 powerButton, timeButton, startCancelButton,
                 door, 
@@ -142,7 +143,7 @@ namespace Microwave.Test.Integration
         [Test]
         public void UserInterface_CookController_StartCooking_700W()
         {
-            for (int p = 50; p <= 700; p += 50)
+            for (int p = 50; p <= cooker.GetMaxPower(); p += 50)
             {
                 powerButton.Pressed += Raise.Event();
             }
@@ -151,7 +152,7 @@ namespace Microwave.Test.Integration
             startCancelButton.Pressed += Raise.Event();
 
             // Should start cooking 
-            output.Received().OutputLine(Arg.Is<string>(str => str.Contains("PowerTube works with 700")));
+            output.Received().OutputLine(Arg.Is<string>(str => str.Contains($"PowerTube works with {cooker.GetMaxPower()}")));
         }
 
         [Test]
