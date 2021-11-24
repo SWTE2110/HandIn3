@@ -199,6 +199,7 @@ namespace Microwave.Test.Integration
 
             // Now should have turned off light
             output.Received(1).OutputLine(Arg.Is<string>(str => str.Contains("Light is turned off")));
+            output.Received(3).OutputLine(Arg.Is<string>(str => str.Contains("buzz")));
 
         }
 
