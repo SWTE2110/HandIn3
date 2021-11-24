@@ -29,9 +29,6 @@ namespace Microwave.App
 
             CookController cooker = new CookController(timer, display, powerTube);
 
-            cooker.ExtendTimeMin += timer.ExtendTimerMinEvent;
-            cooker.ExtendTimeSec += timer.ExtendTimerSecEvent;
-
             UserInterface ui = new UserInterface(powerButton, timeButton, startCancelButton, door, display, light, cooker, buzzer);
 
             // Finish the double association
@@ -48,21 +45,30 @@ namespace Microwave.App
 
             string n = "1";
 
-            while (n != "3")
+            while (n != "0")
             {
-                Console.WriteLine("Press 1 to add 1 minut | Press 2 to add 5 seconds | Press 3 to set  permanent Time");
+                Console.WriteLine("Press 1 to add 1 minut | Press 2 to add 5 seconds | Press 0 to set  permanent time");
 
                 n = Console.ReadLine();
 
-                // Minuts:
-                if (n == "1")
-                    cooker.OnExtendTime(true);
-
-                // Seconds
-                if (n == "2")
-                    cooker.OnExtendTime(false);
+                switch (n)
+                {
+                    case "1":
+                        // Minuts:
+                        cooker.OnExtendTime(true);
+                        break;
+                    case "2":
+                        // Seconds
+                        cooker.OnExtendTime(false);
+                        break;
+                    default:
+                        // Quit
+                        n = "0";
+                        break;
+                }
 
             }
+
             // The simple sequence should now run
 
             System.Console.WriteLine("When you press enter, the program will stop");

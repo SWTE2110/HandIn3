@@ -38,6 +38,9 @@ namespace Microwave.Classes.Controllers
             myDisplay = display;
             myPowerTube = powerTube;
 
+            ExtendTimeMin += timer.ExtendTimerMinEvent;
+            ExtendTimeSec += timer.ExtendTimerSecEvent;
+
             timer.Expired += new EventHandler(OnTimerExpired);
             timer.TimerTick += new EventHandler(OnTimerTick);
         }
