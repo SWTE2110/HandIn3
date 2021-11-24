@@ -22,6 +22,8 @@ namespace Microwave.Test.Unit
 
         private ICookController cooker;
         private ITimer timer;
+        private IBuzzer buzzer;
+
 
         [SetUp]
         public void Setup()
@@ -34,13 +36,17 @@ namespace Microwave.Test.Unit
             display = Substitute.For<IDisplay>();
             cooker = Substitute.For<ICookController>();
             timer = Substitute.For<ITimer>();
+            buzzer = Substitute.For<IBuzzer>();
+
 
             uut = new UserInterface(
                 powerButton, timeButton, startCancelButton,
                 door,
                 display,
                 light,
-                cooker);
+                cooker,
+                buzzer);
+
         }
 
         [Test]
@@ -271,6 +277,21 @@ namespace Microwave.Test.Unit
             // Cooking is done
             uut.CookingIsDone();
             display.Received(1).Clear();
+        }
+
+        [Test]
+        public void Cooking_CookingIsDone_BuzzThreeTimes()
+        {
+            powerButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetPower
+            timeButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in SetTime
+            startCancelButton.Pressed += Raise.EventWith(this, EventArgs.Empty);
+            // Now in cooking
+
+            // Cooking is done
+            uut.CookingIsDone();
+            buzzer.Received(1).BuzzThreeTimes();
         }
 
         [Test]

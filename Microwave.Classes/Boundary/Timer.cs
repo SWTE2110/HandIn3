@@ -20,8 +20,8 @@ namespace Microwave.Classes.Boundary
             timer.Elapsed += OnTimerEvent;
             timer.Interval = 1000; // 1 second intervals
             timer.AutoReset = true;  // Repeatable timer
-
         }
+
 
         public void Start(int time)
         {
@@ -62,8 +62,5 @@ namespace Microwave.Classes.Boundary
                 Expire();
             }
         }
-
-
-
     }
 }
