@@ -159,13 +159,11 @@ namespace Microwave.Test.Unit
         public void Test_A_Extend_Time_Event_Minuts()
         {
 
-            bool EventMinIsCalled = false;
-
-            cooker.ExtendTimeMin += (sender, args) => EventMinIsCalled = true;
+            cooker.ExtendTimeMin += uut.ExtendTimerMinEvent;
 
             cooker.ExtendTimeMin += Raise.Event();
 
-            Assert.That(EventMinIsCalled == true);
+            cooker.Received(1).ExtendTimeMin += uut.ExtendTimerMinEvent;
 
         }
 
@@ -173,13 +171,11 @@ namespace Microwave.Test.Unit
         public void Test_A_Extend_Time_Event_Seconds()
         {
 
-            bool EventSecIsCalled = false;
-
-            cooker.ExtendTimeSec += (sender, args) => EventSecIsCalled = true;
+            cooker.ExtendTimeSec += uut.ExtendTimerMinEvent;
 
             cooker.ExtendTimeSec += Raise.Event();
 
-            Assert.That(EventSecIsCalled == true);
+            cooker.Received(1).ExtendTimeSec += uut.ExtendTimerMinEvent;
 
         }
     }
