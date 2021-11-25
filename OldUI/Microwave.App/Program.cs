@@ -43,18 +43,29 @@ namespace Microwave.App
             startCancelButton.Press();
 
 
-            string n = "0";
+            string n = "1";
 
-            while (n == "1")
-
+            while (n != "0")
             {
-                Console.WriteLine("Press 1 to add 1 minut");
+                Console.WriteLine("Press 1 to add 1 minut | Press 2 to add 5 seconds | Press 0 to set  permanent time");
 
                 n = Console.ReadLine();
 
-                if (n == "1")
-                    timeButton.Press();
-              
+                switch (n)
+                {
+                    case "1":
+                        // Minuts:
+                        cooker.OnExtendTime(true);
+                        break;
+                    case "2":
+                        // Seconds
+                        cooker.OnExtendTime(false);
+                        break;
+                    default:
+                        // Quit
+                        n = "0";
+                        break;
+                }
 
             }
 
