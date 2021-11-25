@@ -157,27 +157,16 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Test_A_Extend_Time_Event_Minuts()
+        public void Test_A_Extend_Time_Event()
         {
 
-            cooker.ExtendTimeMin += uut.ExtendTimerMinEvent;
+            cooker.ExtendTime += uut.ExtendTimerEvent;
 
-            cooker.ExtendTimeMin += Raise.Event();
+            cooker.ExtendTime += Raise.Event();
 
-            cooker.Received(1).ExtendTimeMin += uut.ExtendTimerMinEvent;
+            cooker.Received(1).ExtendTime += uut.ExtendTimerEvent;
 
         }
 
-        [Test]
-        public void Test_A_Extend_Time_Event_Seconds()
-        {
-
-            cooker.ExtendTimeSec += uut.ExtendTimerMinEvent;
-
-            cooker.ExtendTimeSec += Raise.Event();
-
-            cooker.Received(1).ExtendTimeSec += uut.ExtendTimerMinEvent;
-
-        }
     }
 }

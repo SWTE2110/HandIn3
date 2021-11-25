@@ -98,20 +98,15 @@ namespace Microwave.Test.Unit
             Assert.That(res,Is.EqualTo(power));
         }
         [Test]
-        public void Test_ExtendTime_Eventhandler_Minuts_And_Seconds()
+        public void Test_ExtendTime_Eventhandler()
         {
 
             int x = 0;
 
             // Test af event der addere 1 minut
-            uut.ExtendTimeMin += (sender, args) => x++;
-            uut.OnExtendTime(true);
+            uut.ExtendTime += (sender, args) => x++;
+            uut.OnExtendTime();
             Assert.AreEqual(x, 1);
-
-            // Test af event der addere 5 sekunder
-            uut.ExtendTimeSec += (sender, args) => x++;
-            uut.OnExtendTime(false);
-            Assert.AreEqual(x, 2);
 
         }
 
