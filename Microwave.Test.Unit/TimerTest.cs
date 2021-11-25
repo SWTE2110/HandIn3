@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Threading;
 using Microwave.Classes.Interfaces;
 using NSubstitute;
@@ -124,6 +124,7 @@ namespace Microwave.Test.Unit
         public void Stop_StartedOneTick_NoExpiredTriggered()
         {
             ManualResetEvent pause = new ManualResetEvent(false);
+            int notifications = 0;
 
             uut.Expired += (sender, args) => pause.Set();
             uut.TimerTick += (sender, args) => uut.Stop();

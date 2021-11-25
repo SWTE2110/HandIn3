@@ -35,6 +35,16 @@ namespace Microwave.Test.Integration
 
         #region CookController_PowerTube
 
+        [TestCase(100)]
+        [TestCase(700)]
+        [TestCase(1500)]
+        public void CookController_PowerTube_GetMaxPower(int power)
+        {
+            powerTube = new PowerTube(output, power);
+            cooker = new CookController(timer, display, powerTube, ui);
+            Assert.That(cooker.GetMaxPower(),Is.EqualTo(power));
+        }
+
         [Test]
         public void CookController_PowerTube_TurnOn_50W()
         {

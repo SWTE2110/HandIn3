@@ -37,6 +37,7 @@ namespace Microwave.Test.Integration
             
 
             powerTube = Substitute.For<IPowerTube>();
+            powerTube.MaxPower.Returns(700);
             timer = Substitute.For<ITimer>();
             output = Substitute.For<IOutput>();
 
@@ -193,10 +194,13 @@ namespace Microwave.Test.Integration
             powerTube.Received().TurnOn(100);
         }
 
-        [Test]
-        public void UI_CookController_StartCooking_700W()
+        [TestCase(100)]
+        [TestCase(700)]
+        [TestCase(1500)]
+        public void UI_CookController_StartCooking_MaxPower(int pow)
         {
-            for (int p = 50; p <= 700; p += 50)
+            powerTube.MaxPower.Returns(pow);
+            for (int p = 50; p <= cooker.GetMaxPower(); p += 50)
             {
                 powerButton.Press();
             }
@@ -206,7 +210,7 @@ namespace Microwave.Test.Integration
 
             // Cooking has started
             // Can be verified by powertube
-            powerTube.Received().TurnOn(700);
+            powerTube.Received().TurnOn(cooker.GetMaxPower());
         }
 
         [Test]
