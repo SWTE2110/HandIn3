@@ -46,6 +46,7 @@ namespace Microwave.App
             string n = "0";
 
             while (n == "1")
+
             {
                 Console.WriteLine("Press 1 to add 1 minut");
 
