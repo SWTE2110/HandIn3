@@ -157,7 +157,7 @@ namespace Microwave.Test.Unit
         }
 
         [Test]
-        public void Test_A_Extend_Time_Event()
+        public void Extend_Time_Event_Is_Called()
         {
 
             cooker.ExtendTime += uut.ExtendTimerEvent;
@@ -165,6 +165,48 @@ namespace Microwave.Test.Unit
             cooker.ExtendTime += Raise.Event();
 
             cooker.Received(1).ExtendTime += uut.ExtendTimerEvent;
+
+        }
+
+        [Test]
+        public void Extend_Time_Event_TimeRemaining_Is_Extended()
+        {
+
+            var originalTime = uut.TimeRemaining;
+
+            cooker.ExtendTime += uut.ExtendTimerEvent;
+
+            cooker.ExtendTime += Raise.Event();
+
+            Assert.That(uut.TimeRemaining > originalTime);
+
+        }
+
+        [Test]
+        public void Extend_Time_Event_TimeRemaining_Is_Changed()
+        {
+
+            var originalTime = uut.TimeRemaining;
+
+            cooker.ExtendTime += uut.ExtendTimerEvent;
+
+            cooker.ExtendTime += Raise.Event();
+
+            Assert.That(uut.TimeRemaining != originalTime);
+
+        }
+
+        [Test]
+        public void Extend_Time_Event_TimeRemaining_Is_Not_Smaller_Than_OriginalTime()
+        {
+
+            var originalTime = uut.TimeRemaining;
+
+            cooker.ExtendTime += uut.ExtendTimerEvent;
+
+            cooker.ExtendTime += Raise.Event();
+
+            Assert.That(!(uut.TimeRemaining < originalTime));
 
         }
 
