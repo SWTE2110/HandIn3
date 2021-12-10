@@ -182,32 +182,29 @@ namespace Microwave.Test.Unit
 
         }
 
-        [Test]
-        public void Extend_Time_Event_TimeRemaining_Is_Changed()
+
+        [TestCase(1)]
+        [TestCase(2)]
+        [TestCase(3)]
+        public void Extend_Time_Correct_TimeRemaiting(int ticks)
         {
-
-            var originalTime = uut.TimeRemaining;
-
             cooker.ExtendTime += uut.ExtendTimerEvent;
 
+            ManualResetEvent pause = new ManualResetEvent(false);
+            int ticksGone = 0;
+            uut.TimerTick += (sender, args) =>
+            {
+                ticksGone++;
+                if (ticksGone >= ticks)
+                    pause.Set();
+            };
+            uut.Start(5);
             cooker.ExtendTime += Raise.Event();
 
-            Assert.That(uut.TimeRemaining != originalTime);
+            // wait for ticks, only a little longer
+            pause.WaitOne(ticks * 1000 + 100);
 
-        }
-
-        [Test]
-        public void Extend_Time_Event_TimeRemaining_Is_Not_Smaller_Than_OriginalTime()
-        {
-
-            var originalTime = uut.TimeRemaining;
-
-            cooker.ExtendTime += uut.ExtendTimerEvent;
-
-            cooker.ExtendTime += Raise.Event();
-
-            Assert.That(!(uut.TimeRemaining < originalTime));
-
+            Assert.That(uut.TimeRemaining, Is.EqualTo(60+5 - ticks * 1));
         }
 
     }
